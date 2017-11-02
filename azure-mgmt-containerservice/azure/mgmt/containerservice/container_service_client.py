@@ -30,16 +30,23 @@ class ContainerServiceClientConfiguration(AzureConfiguration):
      Microsoft Azure subscription. The subscription ID forms part of the URI
      for every service call.
     :type subscription_id: str
+    :param resource_type: resource type for which the list of orchestrators
+     needs to be returned
+    :type resource_type: str
     :param str base_url: Service URL
     """
 
     def __init__(
-            self, credentials, subscription_id, base_url=None):
+            self, credentials, subscription_id, resource_type=None, base_url=None):
 
         if credentials is None:
             raise ValueError("Parameter 'credentials' must not be None.")
         if subscription_id is None:
             raise ValueError("Parameter 'subscription_id' must not be None.")
+        if not isinstance(subscription_id, str):
+            raise TypeError("Parameter 'subscription_id' must be str.")
+        if resource_type is not None and not isinstance(resource_type, str):
+            raise TypeError("Optional parameter 'resource_type' must be str.")
         if not base_url:
             base_url = 'https://management.azure.com'
 
@@ -50,6 +57,7 @@ class ContainerServiceClientConfiguration(AzureConfiguration):
 
         self.credentials = credentials
         self.subscription_id = subscription_id
+        self.resource_type = resource_type
 
 
 class ContainerServiceClient(object):
@@ -70,13 +78,16 @@ class ContainerServiceClient(object):
      Microsoft Azure subscription. The subscription ID forms part of the URI
      for every service call.
     :type subscription_id: str
+    :param resource_type: resource type for which the list of orchestrators
+     needs to be returned
+    :type resource_type: str
     :param str base_url: Service URL
     """
 
     def __init__(
-            self, credentials, subscription_id, base_url=None):
+            self, credentials, subscription_id, resource_type=None, base_url=None):
 
-        self.config = ContainerServiceClientConfiguration(credentials, subscription_id, base_url)
+        self.config = ContainerServiceClientConfiguration(credentials, subscription_id, resource_type, base_url)
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
