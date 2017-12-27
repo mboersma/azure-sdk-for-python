@@ -12,23 +12,18 @@
 from msrest.serialization import Model
 
 
-class ContainerServiceSshPublicKey(Model):
-    """Contains information about SSH certificate public key data.
+class OperationListResult(Model):
+    """The operation list response that contains all operations for Azure
+    Container Service.
 
-    :param key_data: Certificate public key used to authenticate with VMs
-     through SSH. The certificate must be in PEM format with or without
-     headers.
-    :type key_data: str
+    :param value: The list of operations.
+    :type value: list[~azure.mgmt.containerservice.models.Operation]
     """
 
-    _validation = {
-        'key_data': {'required': True},
-    }
-
     _attribute_map = {
-        'key_data': {'key': 'keyData', 'type': 'str'},
+        'value': {'key': 'value', 'type': '[Operation]'},
     }
 
-    def __init__(self, key_data):
-        super(ContainerServiceSshPublicKey, self).__init__()
-        self.key_data = key_data
+    def __init__(self, value=None):
+        super(OperationListResult, self).__init__()
+        self.value = value

@@ -9,10 +9,12 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+from .operations import Operations
 from .container_services_operations import ContainerServicesOperations
 from .managed_clusters_operations import ManagedClustersOperations
 
 __all__ = [
+    'Operations',
     'ContainerServicesOperations',
     'ManagedClustersOperations',
 ]

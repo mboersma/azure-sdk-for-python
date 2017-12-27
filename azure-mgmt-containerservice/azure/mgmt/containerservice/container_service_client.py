@@ -13,6 +13,7 @@ from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
 from .version import VERSION
+from .operations.operations import Operations
 from .operations.container_services_operations import ContainerServicesOperations
 from .operations.managed_clusters_operations import ManagedClustersOperations
 from . import models
@@ -58,6 +59,8 @@ class ContainerServiceClient(object):
     :ivar config: Configuration for client.
     :vartype config: ContainerServiceClientConfiguration
 
+    :ivar operations: Operations operations
+    :vartype operations: azure.mgmt.containerservice.operations.Operations
     :ivar container_services: ContainerServices operations
     :vartype container_services: azure.mgmt.containerservice.operations.ContainerServicesOperations
     :ivar managed_clusters: ManagedClusters operations
@@ -83,6 +86,8 @@ class ContainerServiceClient(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
+        self.operations = Operations(
+            self._client, self.config, self._serialize, self._deserialize)
         self.container_services = ContainerServicesOperations(
             self._client, self.config, self._serialize, self._deserialize)
         self.managed_clusters = ManagedClustersOperations(

@@ -44,6 +44,7 @@ class OrchestratorVersionProfileListResult(Model):
     }
 
     def __init__(self, orchestrators):
+        super(OrchestratorVersionProfileListResult, self).__init__()
         self.id = None
         self.name = None
         self.type = None

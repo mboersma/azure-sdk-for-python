@@ -9,6 +9,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+from .operation_display import OperationDisplay
+from .operation import Operation
+from .operation_list_result import OperationListResult
 from .resource import Resource
 from .container_service_custom_profile import ContainerServiceCustomProfile
 from .key_vault_secret_ref import KeyVaultSecretRef
@@ -40,6 +43,9 @@ from .container_service_client_enums import (
 )
 
 __all__ = [
+    'OperationDisplay',
+    'Operation',
+    'OperationListResult',
     'Resource',
     'ContainerServiceCustomProfile',
     'KeyVaultSecretRef',
